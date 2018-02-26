@@ -28,6 +28,7 @@ var app = app || {};
     // //  OLD forEach():
     // articleData.forEach(articleObject => Article.all.push(new Article(articleObject)));
 
+    // Article.all= articleData.map(ele => new Article(ele));
     Article.all= articleData.map(x => new Article(x));
 
   };
@@ -56,21 +57,30 @@ var app = app || {};
         accumulator.push(currentValue);
       }
       return accumulator;
-
     },[]);
   };
 
-  
+
 
   Article.numWordsByAuthor = () => {
+
     return Article.allAuthors().map(author => {
-      console.log('here');
-      let authorArticles = Article.all.filter(x => x.author);
-      authorArticles.map(x => x.body.split(' ').length).reduce((accumulator, currentValue) => {
-        console.log('reduce');
-        return accumulator + currentValue;
-      }, 0)
+      return {
+        name: author,
+        numWords: Article.all.filter(a => a.author === author)
+          .map(a => a.body.match(/\b\w+/g).length)
+          .reduce((a, b) => a + b)
+      }
     })
+
+    // return Article.allAuthors().map(author => {
+    //   console.log('here');
+    //   let authorArticles = Article.all.filter(x => x.author);
+    //   authorArticles.map(x => x.body.split(' ').length).reduce((accumulator, currentValue) => {
+    //     console.log('reduce');
+    //     return accumulator + currentValue;
+    //   }, 0)
+    // })
   };
 
   Article.truncateTable = callback => {

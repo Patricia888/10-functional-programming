@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/modules.css">
     <link rel="icon" type="image/x-icon" href="https://avatars2.githubusercontent.com/u/18607604?v=3&s=200">
+
+    <!-- handlebars -->
+<script id="author-template" type="text/x-handlebars-template">
+    <li><strong>{{name}}</strong>: {{numWords}} words written</li>
+  </script>
   </head>
   <body>
     <header class="site-header clearfix">
@@ -48,8 +53,9 @@
     <script src="scripts/article.js"></script>
     <script src="scripts/articleView.js"></script>
     <script>
-      //add something in fetchAll, a callback
-      app.Article.fetchAll();
+      //add something in fetchAll, a callback DONE
+      // app.Article.fetchAll();
+      app.Article.fetchAll(app.articleView.initAdminPage);
     </script>
   </body>
 </html>
